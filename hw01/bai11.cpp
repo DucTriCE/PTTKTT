@@ -15,7 +15,7 @@ int main(){
         while(i<=n){
             sosanh+=1;
             int j=1;
-            s=s+(1/i);
+            s=s+(float)1/i;
             gan+=2;
             while(j<=s){
                 sosanh+=1;
