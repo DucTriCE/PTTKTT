@@ -22,7 +22,7 @@ int main(){
                 gan+=2;
             }
             sosanh+=1;
-            i+=3; //Nhom 3
+            i+=2; //Nhom 2
             gan+=1;
         }
         sosanh+=1;
