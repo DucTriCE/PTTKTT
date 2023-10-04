@@ -13,11 +13,8 @@ int main(){
     freopen("../output.txt","w",stdout);
     int n=1;
     while(n<=20){
-        int gan=0, sosanh=0;
-        gan+=(n+2);
-        gan+=2*sigma(n);
-        sosanh+=(n+1);
-        sosanh+=(sigma(n));
+        int gan=(n*n)/2 + n + 2;
+        int sosanh= (n*n)/4 + n + 1;
         cout << "Case n=" << n << ": G(n)=" << gan << " SS(n)=" << sosanh << "\n";
         n++;
     }
