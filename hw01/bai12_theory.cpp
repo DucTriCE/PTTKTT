@@ -4,7 +4,8 @@ using namespace std;
 
 int sigma(int n){
     int sum=0;
-    for(int i=1; i<=n/2; i++)sum+=i;
+    for(int i=1; i<=n/2; i++)sum+=(2*i+1);
+    cout << sum << " ";
     return sum;
 }
 int main(){
