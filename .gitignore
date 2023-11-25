@@ -22,6 +22,7 @@ test.cpp
 *.rar
 *.tar
 *.zip
+*.json
 
 # Logs and databases #
 ######################
