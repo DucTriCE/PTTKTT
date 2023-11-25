@@ -1,24 +1,23 @@
 #include <iostream>
 #include <vector>
-#include <string>
 using namespace std;
 
+//Co tham khao y tuong tu https://blog.luyencode.net/liet-ke-cac-hoan-vi/#huong-dan-giai-bai-toan-liet-ke-hoan-vi-to-hop
+vector<int> Check(9,0);
+vector<int> Permutations(9);
 
-vector<int> Check(100000000,0);
-vector<int> Permutations(100000000);
-
-void output(vector<int> Permutations, int size) {
-    for (int i=0; i<size; i++)cout << Permutations[i] << " ";
+void output(int n) {
+    for (int i=0; i<n; i++)cout << Permutations[i]<< " ";
     cout << endl;
 }
 
-void BackTracking(vector<int> v, int size, int k){
-    for (int i=0; i<size; i++) {
+void BackTracking(int k, int n){
+    for (int i=0; i<n; i++) {
 		if (!Check[i]) {
-            Permutations[k] = v[i];
+            Permutations[k] = i+1;
             Check[i] = 1;
-            if(k==size-1)output(Permutations, size);
-            else BackTracking(v, size, k+1);
+            if(k==n-1)output(n);
+            else BackTracking(k+1, n);
             Check[i]=0;
 		}
 	}
@@ -29,14 +28,5 @@ int main() {
     freopen("../output.txt","w",stdout);
     int n;
     cin >> n;
-    int size = to_string(n).length();
-    vector<int> v(size);
-    vector<int> Permutations(size);
-
-    for(int i=0; i<v.size(); i++){
-        v[i] = n%10;
-        n/=10;
-    }
-    BackTracking(v, size, 0);
+    BackTracking(0, n);
 }
-
