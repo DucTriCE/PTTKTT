@@ -8,28 +8,17 @@ using
 #include <vector>
 #include <map>
 #include <string>
+#include <set>
 using namespace std;
 
 //###INSERT CODE HERE -
-
 struct Graph{   
-    map<string, int> mp;
-    vector<string> vertices;
-    vector<vector<int>> G;
-
-    void nhap(int v, int e){
-        G.resize(v, vector<int>(v,0));
-        vertices.resize(v);
-        for(int i=0; i<v; i++){
-            string a;
-            cin >> a;
-            vertices[i]=a;
-            mp[a]=i; //Save index of vertices
-        }
+    map<string, set<string>> mp;
+    void nhap(int e){
         for(int j=0; j<e; j++){
             string u, i;
             cin >> u >> i;
-            G[mp[u]][mp[i]]=1;
+            mp[u].insert(i);
         }
     }
     void myProcess(int n){
@@ -39,33 +28,27 @@ struct Graph{
             if(x==1){
                 string a, b;
                 cin >> a >> b;
-                if(G[mp[a]][mp[b]]==1)cout<<"TRUE\n";
+                if(mp[a].find(b)!=mp[a].end())cout<<"TRUE\n";
                 else cout << "FALSE\n";
             }
             else{
                 string a;
                 cin >> a;
-                bool flag = false;
-                for(int i=0; i<G.size(); i++){
-                    if(G[mp[a]][i]==1){
-                        cout << vertices[i] << " ";
-                        flag = true;
-                    }
-                }
-                if(flag==false)cout<<"NONE\n";
-                else cout << "\n";
+                cout << mp[a].size() << "\n";
             }
         }
     }
 };
+
 
 int main()
 {
     freopen("../input.txt","r",stdin);
     freopen("../output.txt","w",stdout);
     Graph G;
-    int v, e, n; cin >> v >> e >> n;
-    G.nhap(v, e);
+    int e, n; 
+    cin >> e >> n;
+    G.nhap(e);
     G.myProcess(n);
     return 0;
 }
