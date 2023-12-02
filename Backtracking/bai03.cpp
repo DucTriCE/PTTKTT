@@ -3,6 +3,10 @@
 #include <math.h>
 using namespace std;
 
+//Tham khao lam tron tu ChatGPT o dong 24
+//Tham khao cach fix loi~ lam tron o dong 25 tu ban 21522708 (Thay vi chia 10 o dong 24, ta *10 o variable "diem")
+//Tham khao cach doi float sang long double tu ban 21522708 (Nham` fix loi lam tron)
+
 vector<long double> lst;
 vector<int> heso;
 
@@ -13,15 +17,16 @@ void output() {
 
 void BackTracking(int n, long double diem, int k){
     for(long double i=0.25; i<=10; i+=0.25){
-        long double score=0;
         lst[k] = i;
         if(k==n-1){
+            long double score=0;
             for(int j=0; j<lst.size(); j++)score+=(((long double)heso[j]/100)*lst[j]);
-            long double roundedScore = roundf(score*10);
-            if(diem*10==roundedScore){
+            score = roundf(score*10);
+            if(diem*10==score){
                 output();
                 // cout << " DTB: " << score << " DIEM: " << diem << endl;
             }
+            else if(diem*10<score)break;
         }
         else BackTracking(n, diem, k+1);
     }
