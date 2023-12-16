@@ -18,8 +18,8 @@ int get_minidx(vector<int> machine_time){
 }
 
 int main() {    
-    freopen("input.txt","r",stdin);
-    freopen("output.txt","w",stdout);
+    freopen("../input.txt","r",stdin);
+    freopen("../output.txt","w",stdout);
     int n, m;
     cin >> n >> m;
     vector<pair<int, int>> x(n);
@@ -34,6 +34,11 @@ int main() {
     }
 
     sort(x.rbegin(), x.rend()); 
+    // for(int i=0; i<n; i++){
+    //     cout << x[i].first << " ";
+    // }
+    // cout << endl;
+
     int min_idx = 0;     
 
     for(int i=0; i<n; i++){
