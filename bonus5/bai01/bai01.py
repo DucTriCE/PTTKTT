@@ -1,18 +1,24 @@
 import random
 
 def insert(item, x):
-    return x + [item]
+    mylst = []
+    for i in range(len(x) + 1):
+        tmp = x[:i] + [item] + x[i:]
+        # print("tmp ", tmp)
+        if tmp not in mylst:
+            mylst.append(tmp)
+    return mylst
 
-def gen_subset(A):
+def permutation(A):
     if not A:
         return []
-    S = [[]]
+    S = [[A[0]]]
 
-    for i in range(0, len(A)):
+    for i in range(1, len(A)):
         P = []
         for x in S:
-            P.append(insert(A[i], x))
-        S.extend(P)
+            P.extend(insert(A[i], x))
+        S = P
     return S
 
 '''-------------MAIN FUNCTION-----------------'''
@@ -36,8 +42,8 @@ while True:
                 flag=True
             else:
                 flag=False
-                results = gen_subset(A)
-                print(f"There are a total of {len(results)} subsets, including: ")
+                results = permutation(A)
+                print(f"There are a total of {len(results)} permutations, including: ")
                 for item in results:
                     print(item)
 
@@ -56,8 +62,8 @@ while True:
             A = random.sample(range(0, 9), n)
             print(f"Here is the random array that is created from {n} elements: {A}")
 
-            results = gen_subset(A)
-            print(f"There are a total of {len(results)} subsets, including: ")
+            results = permutation(A)
+            print(f"There are a total of {len(results)} permutations, including: ")
             for item in results:
                 print(item)
     
