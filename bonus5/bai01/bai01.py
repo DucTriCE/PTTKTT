@@ -4,7 +4,7 @@ def insert(item, x):
     mylst = []
     for i in range(len(x) + 1):
         tmp = x[:i] + [item] + x[i:]
-        # print("tmp ", tmp)
+        print("tmp ", tmp)
         if tmp not in mylst:
             mylst.append(tmp)
     return mylst
@@ -18,6 +18,7 @@ def permutation(A):
         P = []
         for x in S:
             P.extend(insert(A[i], x))
+        print(P)
         S = P
     return S
 
