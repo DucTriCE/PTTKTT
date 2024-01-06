@@ -1,41 +1,57 @@
-#include<iostream>
-#include<vector>
-#include<cstring>
+#include <iostream>
+#include <vector>
+#define ll long long
 
 using namespace std;
 
-const int MOD = 1e9 + 7; 
-string map[1001][1001];
-int table [1001][1001];
-int n;
-int DC(int table[][1001], string map[][1001], int x, int y)
-{
-    if (map[x][y] == "*")
-        return 0;
-    if (x==n && y==n)
-    {
-        return table[x][y] = 1;
-    }
-    if (table[x][y] != -1)
-        return table[x][y];
-    if (x == n)
-        return table[x][y] = DC(table, map, x, y+1) % MOD;
-    else if (y == n)
-        return table[x][y] = DC(table, map, x+1, y) % MOD;
-    else
-        return table[x][y] = (DC(table, map, x, y+1) + DC(table, map, x+1, y)) % MOD;
-}
+const ll MOD = 1e9 + 7;
 
-int main()
-{
-    cin>>n;
-    for (int i = 1; i <= n; i++)
-    {
-        string temp;
-        cin >> temp;
-        for (int j = 1; j <= n; j++)
-            map[i][j] = temp[j-1];
+int main(){
+    freopen("../input.txt","r",stdin);
+    freopen("../output.txt","w",stdout);
+    int n;
+    cin >> n;
+
+    //road[i][j] = toa do (i,j) tren ban do duong di
+    //road[i][j] == 1 , (i,j) = '.'
+    //road[i][j] == 0, (i,j) == '*'
+    //road[i][j] == 1, co the di vao diem (i,j)
+    vector<vector<int>> road(n+2, vector<int>(n+2,0));
+
+    for(int i=1; i<=n; i++){
+        string s;
+        cin >> s;
+        for(int j=1; j<=n; j++){
+            if(s[j-1]=='.')road[i][j]=1;
+        }
     }
-    memset(table, -1, sizeof(table));
-    cout<<DC(table, map, 1, 1);
+    if(road[n][n]!=1){
+        cout << 0;
+        return 0;
+    }
+    // for(int i=0; i<=n+1; i++){
+    //     for(int j=0; j<=n+1; j++)
+    //         cout<<road[i][j]<<" ";
+    //     cout << endl;
+    // }
+
+    //f[i][j] = so cach di toi diem (i,j)
+    //f[i][j] = f[i-1][j] + f[i][j-1]
+    vector<vector<int>> f(n+2, vector<int>(n+2,0));
+
+    //Base case
+    f[1][1]=1;
+
+    for(int i=1; i<=n; i++){
+        for(int j=1; j<=n; j++){
+            if(road[i][j]==1){
+                if(road[i-1][j]==1)f[i][j]+=f[i-1][j];
+                f[i][j]%=MOD;
+
+                if(road[i][j-1]==1)f[i][j]+=f[i][j-1];
+                f[i][j]%=MOD;
+            }
+        }
+    }
+    cout << f[n][n];
 }
