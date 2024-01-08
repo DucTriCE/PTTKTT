@@ -8,6 +8,29 @@ using namespace std;
 //Reference: https://www.youtube.com/watch?v=cr6Ip0J9izc&t=17s (Weighted Job Scheduling Dynamic Programming)
 //Nop kiem nghiem ket qua truoc, khi dung thi se nop lai 1 bang? bao gom giai thich
 
+int binarySearch(vector<int> f, int index) { 
+    // Initialize 'lo' and 'hi' for Binary Search 
+    int lo = 0, hi = index - 1; 
+   
+    // Perform binary Search iteratively 
+    while (lo <= hi) 
+    { 
+        int mid = (lo + hi) / 2; 
+        if (f[mid].finish <= jobs[index].start) 
+        { 
+            if (jobs[mid + 1].finish <= jobs[index].start) 
+                lo = mid + 1; 
+            else
+                return mid; 
+        } 
+        else
+            hi = mid - 1; 
+    } 
+   
+    return -1; 
+}
+
+
 bool compare(vector<ll> &a, vector<ll> &b) {
     return a[1] < b[1];
 }

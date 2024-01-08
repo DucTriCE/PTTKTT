@@ -1,20 +1,33 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <set>
 using namespace std;
 
-vector<vector<int>> Graph;
+map<string, set<string>> Graph;
 map<string, int> vertex_index;
 vector<int> color;
-int v, e;
+int v, e, n;
 
+void output() {
+    for (int i=0; i< color.size(); i++)cout << color[i]<< " ";
+}
 
+bool valid(int k){
+    
+}
+
+//bien j cua no la bien k cua minh
+//bien k la so mau
+//bien n la 
 void BackTracking(int k){
-    for(int i=0; i<v; i++){
-        if(k==v-1){
-
-        }
-        else BackTracking(k+1);
+    if(k==v-1){
+        output();
+        return;
+    }
+    for(int i=0; i<16777215; i++){
+        color[k]=i;
+        if(valid(k))
     }
 }
 
@@ -26,6 +39,13 @@ int main() {
         string x;
         cin >> x;
         vertex_index[x] = i;
+    }
+    color.resize(v);
+    for(int j=0;j<e; j++){
+        string u, i;
+        cin >> u >> i;
+        Graph[u].insert(i);
+        Graph[i].insert(u);
     }
     BackTracking(0);
 }
